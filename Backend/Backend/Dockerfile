@@ -3,6 +3,9 @@ USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
+# Uncommendt to Run in Production Mode
+# This among other things will disable the Swagger GUI
+# ENV DOTNET_ENVIRONMENT=Production
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
