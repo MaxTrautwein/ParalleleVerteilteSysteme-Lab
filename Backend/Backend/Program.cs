@@ -3,6 +3,13 @@ using Backend;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Allow all as Required by the LAB
+// Should not be used in Production  
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("RequiredAllowAll", policy => policy.AllowAnyOrigin());
+});
+
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
