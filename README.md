@@ -2,17 +2,21 @@
 Repo for Lab of "Parallele und Verteilte Systeme"
 
 ## Sample use
-Create a `compose.yaml`File: 
-```yml
-﻿services:
-  backend:
-    image: ghcr.io/maxtrautwein/paralleleverteiltesysteme-lab:master
-    ports: 
-        - 8080:8080 # Expose Port 8080
-```
+Create a `compose.yaml`File.
+You may use [compose.yaml](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/blob/master/compose.yaml) as an Example.
 
 Start the container with `docker compose up`
+
 You may test if it is running by navigating to http://localhost:8080/items
+
+If you run the App in the `Development` mode you may acces the OpenAPI Spec under: http://localhost:8080/openapi/v1.json and the Swagger GUI Under http://localhost:8080/swagger/index.html
+
+### Server Use
+The Examples above use `localhost`. You can easily also host this on a Server.
+
+Ensure that the Configued Port is not blocked by any Firewall, then replace `localhost` with the IP of the Server. You may also replace it with a Domain if you have mapped one.
+
+For HTTPS I Suggest you use a Reverse Proxy in a Container such as Traefik. 
 
 ## 12 Factors
 The Lab Requieres this Project to implement and Document the 12 factors and how they are use here.
@@ -38,7 +42,7 @@ The Possible Values and Effects are documented in the [Example Compose](https://
 ### IV. Backing services
 > Treat backing services as attached resources
 
-TODO: On hold for now as we must wait for the DB Requierments. See #3
+TODO: On hold for now as we must wait for the DB Requierments. See [#3](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/issues/3) 
 
 ### V. Build, release, run
 > Strictly separate build and run stages
@@ -53,7 +57,7 @@ Those are seperate Stages.
 ### VI. Processes
 > Execute the app as one or more stateless processes
 
-TODO: Will be Fulfilled as soon as #3 can be Implemented.
+TODO: Will be Fulfilled as soon as [#3](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/issues/3) can be Implemented.
 
 ### VII. Port binding
 > Export services via port binding
@@ -82,7 +86,7 @@ Should a Debug BUILD be requiered that may be chnged in the Docker file. (_Altho
 ### XI. Logs
 > Treat logs as event streams
 
-TODO: Will be Fulfilled as soon as #9 can be Implemented.
+TODO: Will be Fulfilled as soon as [#9](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/issues/9) can be Implemented.
 
 ### XII. Admin processes
 > Run admin/management tasks as one-off processes
