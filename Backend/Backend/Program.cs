@@ -17,6 +17,9 @@ builder.Services.AddOpenApiDocument();
 
 var app = builder.Build();
 
+Configuration.CustomBinding(app);
+
+
 // OpenAPI if in Develop
 if (app.Environment.IsDevelopment())
 {
@@ -84,4 +87,3 @@ app.MapDelete("/items/{itemId}", (string itemId) =>
 
 
 app.Run();
-

@@ -1,0 +1,8 @@
+﻿services:
+  backend:
+    image: ghcr.io/maxtrautwein/paralleleverteiltesysteme-lab:master
+    environment:
+      # WEBAPI_PORT: 8080 # You may change the Internal Port from the default of 8080
+      DOTNET_ENVIRONMENT: Production # Select "Development" for OpenAPI & Swagger Endpoints
+    ports: 
+        - 8080:8080
