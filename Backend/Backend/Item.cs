@@ -2,28 +2,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Backend;
 
-public class Item
+public class Item(string name, int quantity)
 {
-    public Item(string name, int quantity)
-    {
-        Id = _idCounter++;
-        Name = name;
-        Quantity = quantity;
-    }
-
     public void Update(Item item)
     {
         Name = item.Name;
         Quantity = item.Quantity;
     }
-
-    private static int _idCounter = 1;
     
-    public int Id { get;}
+    public int Id { get; init; }
 
     [Required]
-    public string Name { get; set; }
+    public string Name { get; set; } = name;
 
     [Required]
-    public int Quantity { get; set; }
+    public int Quantity { get; set; } = quantity;
 }

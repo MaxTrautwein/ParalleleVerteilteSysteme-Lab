@@ -1,8 +1,30 @@
-﻿services:
+# secrets: # Sample in case you want to use secrets
+#   connection-string:
+#     file: connection_string.txt
+#   db-pw:
+#     file: db_pw.txt
+
+services:
   backend:
     image: ghcr.io/maxtrautwein/paralleleverteiltesysteme-lab:master
     environment:
       # WEBAPI_PORT: 8080 # You may change the Internal Port from the default of 8080
       DOTNET_ENVIRONMENT: Production # Select "Development" for OpenAPI & Swagger Endpoints
+      ConnectionString: Host=database;Username=postgres;Password=examplePw;Database=postgres
+      # ConnectionString_FILE: /run/secrets/connection-string # for use with Docker secrets # WILL BE Prefered
     ports: 
         - 8080:8080
+    # secrets: # Sample in case you want to use secrets
+    #  - connection-string
+
+  
+  database:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: examplePw
+      # POSTGRES_PASSWORD_FILE: /run/secrets/db-pw
+    # volumes: # Highly Reccomended to store the DB Outside of the Container
+    #   - ./db/database:/var/lib/postgresql/data
+    # secrets: # Sample in case you want to use secrets
+    #  - db-pw
+
