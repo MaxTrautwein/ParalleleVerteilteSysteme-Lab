@@ -4,3 +4,14 @@
     build:
       context: .
       dockerfile: Backend/Dockerfile
+    environment:
+      WEBAPI_PORT: 12345
+      DOTNET_ENVIRONMENT: Development
+      ConnectionString: Host=database;Username=postgres;Password=examplePw;Database=postgres
+    ports:
+        - 8080:12345
+  
+  database:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: examplePw

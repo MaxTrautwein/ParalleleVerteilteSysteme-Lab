@@ -1,3 +1,5 @@
+using WebApplication = Microsoft.AspNetCore.Builder.WebApplication;
+
 namespace Backend;
 
 public static class Configuration
@@ -8,9 +10,30 @@ public static class Configuration
     /// <param name="app"></param>
     internal static void CustomBinding(WebApplication app)
     {
-        var webapiPort = System.Environment.GetEnvironmentVariable("WEBAPI_PORT");
+        var webapiPort = Environment.GetEnvironmentVariable("WEBAPI_PORT");
         if (webapiPort is null) return;
         app.Urls.Clear();
         app.Urls.Add($"http://[::]:{webapiPort}");
+    }
+
+    /// <summary>
+    /// Get a Configuration Value or the Default
+    /// Checks in Order:
+    /// 1. "<paramref name="key"/>_FILE" Environment Variable for Path to Secret. Returns if Exists
+    /// 2: A Environment Variable Directly
+    /// 3: the Default
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="defaultValue"></param>
+    /// <returns></returns>
+    internal static string GetSecretOrEnvVar(string key, string defaultValue = "")
+    {
+        // Check if we have a Secret File Specified
+        var secretFile = Environment.GetEnvironmentVariable($"{key}_FILE");
+        if (secretFile is not null && File.Exists(secretFile))
+        {
+           return File.ReadAllText(secretFile);
+        }
+        return Environment.GetEnvironmentVariable(key) ?? defaultValue;
     }
 }

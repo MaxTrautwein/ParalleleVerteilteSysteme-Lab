@@ -6,7 +6,7 @@ public class ItemValidator : IEndpointFilter
 {
     public ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
     {
-        var item = context.GetArgument<Item>(0);
+        if (context.Arguments.FirstOrDefault(arg => arg is Item) is not Item item) return next(context);
         
         var validationResults = new List<ValidationResult>();
         var validationContext = new ValidationContext(item);

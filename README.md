@@ -11,6 +11,9 @@ You may test if it is running by navigating to http://localhost:8080/items
 
 If you run the App in the `Development` mode you may acces the OpenAPI Spec under: http://localhost:8080/openapi/v1.json and the Swagger GUI Under http://localhost:8080/swagger/index.html
 
+The Example Includes a ProstgresDB.
+For Actual use I reccomend that the Data is mounted, so that it is not stored inside the container and that Docker Secrets are Used with actual Passwords.
+
 ### Server Use
 The Examples above use `localhost`. You can easily also host this on a Server.
 
@@ -42,7 +45,8 @@ The Possible Values and Effects are documented in the [Example Compose](https://
 ### IV. Backing services
 > Treat backing services as attached resources
 
-TODO: On hold for now as we must wait for the DB Requierments. See [#3](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/issues/3) 
+A Postgres DB may be Connected using a Connection String.
+This String may be provided via an Enviorment Variable or a Docker Secret.
 
 ### V. Build, release, run
 > Strictly separate build and run stages
@@ -57,7 +61,8 @@ Those are seperate Stages.
 ### VI. Processes
 > Execute the app as one or more stateless processes
 
-TODO: Will be Fulfilled as soon as [#3](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/issues/3) can be Implemented.
+The State is only ttored in the Database.
+The Backend my connect to a Supported DB to get access to the state.
 
 ### VII. Port binding
 > Export services via port binding
