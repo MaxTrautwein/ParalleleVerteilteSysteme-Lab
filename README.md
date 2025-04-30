@@ -14,6 +14,8 @@ If you run the App in the `Development` mode you may acces the OpenAPI Spec unde
 The Example Includes a ProstgresDB.
 For Actual use I reccomend that the Data is mounted, so that it is not stored inside the container and that Docker Secrets are Used with actual Passwords.
 
+The [Example Compose](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/blob/master/Backend/compose.yaml) Shows an sample for OTLP with Jaeger that may be enabled if so desired.
+
 ### Server Use
 The Examples above use `localhost`. You can easily also host this on a Server.
 
@@ -91,7 +93,8 @@ Should a Debug BUILD be requiered that may be chnged in the Docker file. (_Altho
 ### XI. Logs
 > Treat logs as event streams
 
-TODO: Will be Fulfilled as soon as [#9](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/issues/9) can be Implemented.
+Logs and Telemetry data are Published via OpenTelememetry.
+There is the Option to use the Docker Logs Systems and or Puplish via OTLP
 
 ### XII. Admin processes
 > Run admin/management tasks as one-off processes

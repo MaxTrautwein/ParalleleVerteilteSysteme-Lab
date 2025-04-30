@@ -1,5 +1,9 @@
 using Backend;
 using Microsoft.EntityFrameworkCore;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +21,54 @@ builder.Services.AddOpenApiDocument();
 
 // Connect a DB
 builder.Services.AddDbContext<ItemsContext>(options => 
-    options.UseNpgsql(Configuration.GetSecretOrEnvVar("ConnectionString")));
+    options.UseNpgsql(Configuration.GetSecretOrEnvVar("ConnectionString","")));
+
+// OpenTelemetry
+var serviceName = Configuration.GetSecretOrEnvVar("ServiceName","Parallel-Sys-MaxTrautwein");
+var otlpToConsole = Configuration.GetSecretOrEnvVar("OtlpToConsole", false);
+var otlpToUrl = Configuration.GetSecretOrEnvVar("OtlpEndpoint", "");
+
+builder.Logging.AddOpenTelemetry(options =>
+{
+    options
+        .SetResourceBuilder(
+            ResourceBuilder.CreateDefault()
+                .AddService(serviceName));
+    if (otlpToUrl.Length > 0)
+    {
+       options.AddOtlpExporter(cfg => 
+           cfg.Endpoint = new Uri(otlpToUrl)
+       );
+    }
+       
+    if (otlpToConsole) options.AddConsoleExporter();
+});
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource.AddService(serviceName))
+    .WithTracing(tracing =>
+    {
+        tracing.AddAspNetCoreInstrumentation();
+        if (otlpToConsole) tracing.AddConsoleExporter();
+        if (otlpToUrl.Length > 0)
+        {
+            tracing.AddOtlpExporter(cfg => 
+                cfg.Endpoint = new Uri(otlpToUrl)
+            );
+        }
+    })
+    .WithMetrics(metrics =>
+    {
+        metrics
+            .AddAspNetCoreInstrumentation();
+        if (otlpToUrl.Length > 0)
+        {
+            metrics.AddOtlpExporter(cfg => 
+                cfg.Endpoint = new Uri(otlpToUrl)
+            );
+        }
+        if (otlpToConsole) metrics.AddConsoleExporter();
+    });
+
 
 var app = builder.Build();
 
