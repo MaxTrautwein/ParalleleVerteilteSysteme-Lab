@@ -14,7 +14,7 @@ If you run the App in the `Development` mode you may acces the OpenAPI Spec unde
 The Example Includes a ProstgresDB.
 For Actual use I reccomend that the Data is mounted, so that it is not stored inside the container and that Docker Secrets are Used with actual Passwords.
 
-The [Example Compose](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/blob/master/Backend/compose.yaml) Shows an sample for OTLP with Jaeger that may be enabled if so desired.
+The [Example Compose](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/blob/master/compose.yaml) Shows an sample for OTLP with Jaeger that may be enabled if so desired.
 
 ### Server Use
 The Examples above use `localhost`. You can easily also host this on a Server.
@@ -42,7 +42,7 @@ This defines all dependencies in an non code file.
 > Store config in the environment
 
 The System may be configured using Enviorment Variables.
-The Possible Values and Effects are documented in the [Example Compose](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/blob/master/Backend/compose.yaml)
+The Possible Values and Effects are documented in the [Example Compose](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/blob/master/compose.yaml)
 
 ### IV. Backing services
 > Treat backing services as attached resources
@@ -76,7 +76,7 @@ Besides that Internal Port one may bind any desired and available Port form the 
 ### VIII. Concurrency
 > Scale out via the process model
 
-TODO: Will be Fulfilled as soon as #3 can be Implemented.
+The Entity framework combined with the DB handels this aspect.
 
 ### IX. Disposability
 > Maximize robustness with fast startup and graceful shutdown
