@@ -8,6 +8,8 @@
       WEBAPI_PORT: 12345
       DOTNET_ENVIRONMENT: Development
       ConnectionString: Host=database;Username=postgres;Password=examplePw;Database=postgres
+      OtlpToConsole: false
+      OtlpEndpoint: http://jaeger:4317
     ports:
         - 8080:12345
   
@@ -15,3 +17,12 @@
     image: postgres:16-alpine
     environment:
       POSTGRES_PASSWORD: examplePw
+
+  jaeger:
+    image: jaegertracing/all-in-one
+    ports:
+      - 16686:16686
+      - 4317:4317
+      - 4318:4318
+    environment:
+      - LOG_LEVEL=debug

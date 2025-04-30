@@ -1,3 +1,4 @@
+# Hint: _FILE is supported and Prefered for all Env Vars
 # secrets: # Sample in case you want to use secrets
 #   connection-string:
 #     file: connection_string.txt
@@ -12,6 +13,9 @@ services:
       DOTNET_ENVIRONMENT: Production # Select "Development" for OpenAPI & Swagger Endpoints
       ConnectionString: Host=database;Username=postgres;Password=examplePw;Database=postgres
       # ConnectionString_FILE: /run/secrets/connection-string # for use with Docker secrets # WILL BE Prefered
+      # ServiceName: Parallel-Sys-MaxTrautwein # Override The Service Name used for OTLP
+      # OtlpToConsole: false # set to true to enable log to Console. Usefull if you don't have an endpoint
+      # OtlpEndpoint: http://jaeger:4317 # Where to send Telemetery Data. Nothing will be sent if unset
     ports: 
         - 8080:8080
     # secrets: # Sample in case you want to use secrets
@@ -28,3 +32,12 @@ services:
     # secrets: # Sample in case you want to use secrets
     #  - db-pw
 
+# Sample Jaeger instance for Testing
+#  jaeger:
+#    image: jaegertracing/all-in-one
+#    ports:
+#      - 16686:16686
+#      - 4317:4317
+#      - 4318:4318
+#    environment:
+#      - LOG_LEVEL=debug
