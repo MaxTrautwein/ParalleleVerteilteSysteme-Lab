@@ -16,6 +16,16 @@ For Actual use I reccomend that the Data is mounted, so that it is not stored in
 
 The [Example Compose](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/blob/master/compose.yaml) Shows an sample for OTLP with Jaeger that may be enabled if so desired.
 
+## Kubernetes (Minikube)
+Current Setup
+
+1. Start Minikube `minikube start`
+2. Apply all Deployments
+3. Apply all Services
+4. `kubectl get service backend` Get the Port
+5. `minikube ip`
+6. Access the IP And Port
+
 ### Server Use
 The Examples above use `localhost`. You can easily also host this on a Server.
 
