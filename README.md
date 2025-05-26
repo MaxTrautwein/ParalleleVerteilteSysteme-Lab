@@ -1,6 +1,21 @@
 # ParalleleVerteilteSysteme-Lab
 Repo for Lab of "Parallele und Verteilte Systeme"
 
+## Docker Image
+
+use in Dockerfile:
+```
+FROM ghcr.io/maxtrautwein/paralleleverteiltesysteme-lab:master
+```
+
+pull the Image
+```
+docker pull ghcr.io/maxtrautwein/paralleleverteiltesysteme-lab:master
+```
+
+_GitHub has a now reported bug where it recommends Installing/Pulling the Signature instead of the Image._
+_For your convenience please use the here provided Tags_
+
 ## Sample use
 Create a `compose.yaml`File.
 You may use [compose.yaml](https://github.com/MaxTrautwein/ParalleleVerteilteSysteme-Lab/blob/master/compose.yaml) as an Example.
